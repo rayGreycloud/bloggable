@@ -4,8 +4,10 @@ class PostsIndex extends Component {
   render() {
     return (
       <div>
-        <h3>Posts Index</h3>  
+        <h3>Posts Index</h3>
       </div>
     );
   }
 }
+
+export default PostsIndex;
