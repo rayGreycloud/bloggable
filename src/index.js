@@ -9,20 +9,41 @@ import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
+class TestHeaderComponent extends Component {
+  render() { return <div><h2>Header - header - header - header</h2></div> }
+}
+
+class TestComponentNested extends Component {
+  render() { return <div><h4>This is a nested component.</h4></div> }
+}
+
 class TestComponentOne extends Component {
-  render() { return <div>This is the Test Component One.</div> }
+  render() {
+    return (
+      <div>
+        <h3>This is the Test Component One.</h3>
+        <TestComponentNested />
+      </div>
+    );
+  }
 }
 
 class TestComponentTwo extends Component {
-  render() { return <div>This is the Test Component Two.</div> }
+  render() { return <div><h3>This is the Test Component Two.</h3></div> }
+}
+
+class TestFooterComponent extends Component {
+  render() { return <div><h4>footer - footer - footer - footer</h4></div> }
 }
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <div>
-        <Route path="/test-component-one" component={TestComponentOne}/>
-        <Route path="/test-component-two" component={TestComponentTwo}/>
+        <TestHeaderComponent />
+        <Route path="/page-one" component={TestComponentOne} />
+        <Route path="/page-two" component={TestComponentTwo} />
+        <TestFooterComponent />
       </div>
     </BrowserRouter>
 {/*    <App /> */}
