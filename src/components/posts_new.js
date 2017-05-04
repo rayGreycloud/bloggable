@@ -24,8 +24,8 @@ class PostsNew extends Component {
           component={this.renderField}
         />
         <Field
-          label="Tags"
-          name="tags"
+          label="Categories"
+          name="categories"
           component={this.renderField}
         />
         <Field
@@ -33,12 +33,30 @@ class PostsNew extends Component {
           name="content"
           component={this.renderField}
         />
-
       </form>
     );
   }
 }
 
+function validate(values) {
+  const errors = {};
+
+  if (!values.title) {
+    errors.title = "A post title is required";
+  }
+
+  if (!values.categories) {
+    errors.categories = "At least one category is required";
+  }
+
+  if (!values.content) {
+    errors.content = "Some post content is required";
+  }
+
+  return errors;
+}
+
 export default reduxForm({
+  validate,
   form: 'PostsNewForm'
 })(PostsNew);
